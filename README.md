@@ -2,7 +2,8 @@
 ## VMs
 * In Azure, you are charged for the VM per second
 * In Windows, you have an Administrator username and password where as in Linux, you have SSH keys to access the instance
-* You need to pay for the Windows  License by default, but can use yours if you already have one 
+* You need to pay for the Windows  License by default, but can use yours if you already have one
+* You can "resize" VMs to a bigger/smaller instance in Azure  
 ### Features
 * Auto Shutdown option available
 
@@ -21,7 +22,7 @@
 
 ## PaaS
 * Azure App Services is a PaaS 
-* Includes scaling features, CI/CD, containers, staging and dev environments, etc ...
+* Includes autoscaling features, CI/CD, containers, staging and dev environments, etc ...
 
 ## Regions
 * Usually, there is only one region per country, but in Azure, some countries have multiple regions
@@ -58,3 +59,17 @@
 ### Management Groups
 * Management Groups are used to group multiple subscriptions
 ![](img/management-groups.png)
+
+## VM Scale Sets
+* Multiple Virtual Machines running the same code
+* Supports Autoscaling
+* Can handle upto 100 VMs in a single scale set. Can configure it upto a 1000 VMs
+* VM Scale set is free but you do pay for the underlying instances 
+
+### Azure Virtual Desktop  
+* Azure Virtual Desktop is a desktop version of Windows that runs in the cloud. You can log into it from anywhere 
+
+## Networking Services
+* ExpressRoute - A high speed private connection to Azure
+* Peering Virtual Networks allows instances in one VN to communicate with instances in other VN. This can be global as well
+* You have an option of creating a public/private endpoint on a resource that is created.   
