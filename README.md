@@ -73,3 +73,28 @@
 * ExpressRoute - A high speed private connection to Azure
 * Peering Virtual Networks allows instances in one VN to communicate with instances in other VN. This can be global as well
 * You have an option of creating a public/private endpoint on a resource that is created.   
+
+## Storage Services
+### Azure Storage
+* In Azure, you create a Storage account and in that account you have 4 different types of storages:
+    * Containers (Similar to object storage in S3)
+    * File Shares
+    * Queues
+    * Tables
+* You have `Standard` and `Premium` performance types in Azure Storage. Premium Performance = Low Latency
+* A storage account supports max of 5 PBs 
+* **Zone-redundant** storage stores multiple copies in different AZs where as **locally-redundant** storage stores only in the same AZ
+* You also have Geo-redundant and Geo-Zone redundant that stores copy of your data in a secondary region. These both are available only in the Standard Performance type of Azure Storage
+### Disk Storage
+* In Azure storage you pay per GB whereas in Disk Storage, you pay for the full capacity (ex: 8GB Hard Disk)
+```
+Azure Storage => Unmanaged
+Disk Storage => Managed
+```
+
+### Other Storage Services
+* Azure **Storage Explorer** is a software that can be run on your local machine to upload files to storage. It is getting depreciated soon and is replaced with Storage browser instead which performs the similar functionality as well 
+* **AZcopy** is a CLI tool that allows you to copy files across blob containers (Storage) in Azure. You can also use it to download files locally or even transfer to a storage bucket on another cloud
+* Azure **File Sync** enables to sync on premises file server in the cloud
+* Azure **Migrate** is a service that allows you to easily migrate to the cloud. It scans for VMs, databases, services in your environments (on-premises) and plans for your migration
+* **DataBox** is a physical device that you can request for to transfer data to Azure offline 
