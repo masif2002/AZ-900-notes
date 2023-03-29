@@ -13,9 +13,6 @@
 * Vertical Scaling does ont improve availability (since you're upgrading a one single instance) 
 * There is no limit to horizontal scaling
 
-## Security and Governance
-* Azure Policy and BluePrint is used for security and Governance
-
 ## IaaS 
 * Azure Storage offers 5 PB of Storage Capacity 
 * Network ingress Costs are free in Azure 
@@ -98,3 +95,23 @@ Disk Storage => Managed
 * Azure **File Sync** enables to sync on premises file server in the cloud
 * Azure **Migrate** is a service that allows you to easily migrate to the cloud. It scans for VMs, databases, services in your environments (on-premises) and plans for your migration
 * **DataBox** is a physical device that you can request for to transfer data to Azure offline 
+
+## Identity Services
+* Azure Active Directory (AAD) is an Identity as a Service provided by Azure. It is not the same as the traditional Active Directory that runs on Windows
+* Developers can use AAD to implement authentication for their end users
+* There is an option called Conditional access in AAD which allows to set up MFA and other restrictions on detecting unusual login 
+
+
+## Security and Governance
+* Azure Policy and BluePrint is used for security and Governance
+> Azure Blueprints makes it possible for development teams to rapidly build and start up new environments with trust they're building within organizational compliance
+
+* Microsoft Defender is a paid service provided by Azure for  security protection of cloud services 
+### Zero Trust Security Model
+* Just In Time (JIT) Model: You request for permissions only when you need it
+* Just-Enough-Access (JEA): Least previlige principle 
+
+### Role Based Control Access
+* Roles in Azure are similar to GCP. They are permissions binded to users
+
+> Policies are attached to resources whereas roles are attached to users
