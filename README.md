@@ -102,16 +102,39 @@ Disk Storage => Managed
 * There is an option called Conditional access in AAD which allows to set up MFA and other restrictions on detecting unusual login 
 
 
-## Security and Governance
-* Azure Policy and BluePrint is used for security and Governance
-> Azure Blueprints makes it possible for development teams to rapidly build and start up new environments with trust they're building within organizational compliance
-
-* Microsoft Defender is a paid service provided by Azure for  security protection of cloud services 
 ### Zero Trust Security Model
 * Just In Time (JIT) Model: You request for permissions only when you need it
-* Just-Enough-Access (JEA): Least previlige principle 
+* Just-Enough-Access (JEA): Least previlege principle 
 
 ### Role Based Control Access
 * Roles in Azure are similar to GCP. They are permissions binded to users
 
 > Policies are attached to resources whereas roles are attached to users
+
+## Pricing Calculator
+* Azure has a Total Cost Of Ownership (TCO) calculator that include the price of electiricty, cooling, maintenance and so on ...
+* This can be used to compare your on-premises(TCO) cost with the cloud
+## Security and Governance
+Tools used for security and Governance:
+### Azure Policy
+* You can enforce a policy on resources created. 
+* You can have all Vms have a backup on a regular basis
+### Azure BluePrint
+* You can create Blueprints and attach it to a subscription. The blueprint is created when the subscription is active. The blueprint maybe like have 5 EC2 instances with one Load balancer
+
+### Resource Locks
+* **Read only** locks and **cannot delete** locks on resources can be used
+
+### Service Trust Portal
+* Centralized repository for all the compliance artefacts by Azure
+
+* Microsoft Defender is a paid service provided by Azure for security protection of cloud services 
+
+## Azure Arc
+* Azure Arc is a service that allows you to manage resources running on on-premised and multi-cloud. It is basically a unified view of all the resources that you are using
+
+## Azure Resource Manager (ARM)
+* Azure Resource Manager is what you interact with behind the hood when creating resources in the Console or CLI, powershell or anything ...
+![](img/arm.png)
+
+* You can create ARM templates and deploy those ARM templates to create Resources (more like Infrastrcture as a Code)
