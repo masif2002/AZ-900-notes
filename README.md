@@ -19,6 +19,7 @@
 
 ## Regions
 * Usually, there is only one region per country, but in Azure, some countries have multiple regions
+* As of now, Azure has over 60+ regions
 
 ### Region Pair
 * In Azure, you have something called a region pair, where two regions are paired. And these paired regions have highest speed connections and special treatment during Azure updates 
@@ -96,12 +97,23 @@ Disk Storage => Managed
 * **DataBox** is a physical device that you can request for to transfer data to Azure offline 
 
 ## Identity Services
-* Azure Active Directory (AAD) is an Identity as a Service provided by Azure. It is not the same as the traditional Active Directory that runs on Windows
+* **Azure Active Directory** (AAD) is an Identity as a Service provided by Azure. It is not the same as the traditional Active Directory that runs on Windows
 * Developers can use AAD to implement authentication for their end users
 * There is an option called Conditional access in AAD which allows to set up MFA and other restrictions on detecting unusual login 
 * Azure Active Directory provides the following licenses: Free, Office 365, Premium P1, and Premium P2.
 
-
+### Azure Active Directory preview programs
+1. private preview: Few customers are invited to experience the new features
+2. public preview:
+    * Customers with AAD License are allowed to experience the new features:
+    * Microsoft provides support
+    * SLAs do not apply
+    * In this phase, customers can opt-in to the preview experience.
+3. Generally available (GA): 
+    * the feature is open for any licensed customer to use
+    * the new feature impacts existing functionality unlike public preview phase
+    
+> https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/
 ### Zero Trust Security Model
 * Just In Time (JIT) Model: You request for permissions only when you need it
 * Just-Enough-Access (JEA): Least previlege principle 
@@ -121,6 +133,12 @@ Tools used for security and Governance:
 * You can have all VMs have a backup on a regular basis
 ### Azure BluePrint
 * You can create Blueprints and attach it to a subscription. The blueprint is created when the subscription is active. The blueprint maybe like have 5 VM instances with one Load balancer
+
+### DDos protection
+* Azure DDos Protection **Basic** is free, while you can upgrade to **Standard** for a fee.
+
+### Azure Key Vault
+* The modern way to store cryptographic keys, signed certificates and secrets in Azure
 
 ### Resource Locks
 * **Read only** locks and **cannot delete** locks on resources can be used
@@ -152,9 +170,17 @@ Tools used for security and Governance:
 * **Diagnostic settings** in many Azure resources allows you to collect, export, query and view logs in Azure Monitor  
 * **Workbooks** in Azure Monitor allows you to create and manage a visual reports of your own metrics  
 
+### Azure Cognitive Services API
+* All it takes is an API call to embed the ability to see, hear, speak, search, understand, and accelerate advanced decision-making into your apps.
+* Features: Translation, Image Recognition, Text Recognition, Speech-To-Text, Text-to-Speech, openAI and more ...
+
+> https://azure.microsoft.com/en-us/products/cognitive-services/#overview
 ## Mock Test notes
 * A virtual machine needs a network card, storage and a virtual network. It does not need a public IP address. In fact, most Azure VMs are private and are not accessible from the Internet.
 * Azure Powershell scripts and CLI scripts are not compatible with each other. PowerShell has it's own language, different than CLI
 *  Azure is a public cloud, but has some private cloud offerings such as the GovCloud
 * Firewall is part of the perimeter security
 * Azure Availability Sets allow you to tell Azure which virtual machines are identical, so that Azure will keep them apart physically inside the datacenter. This helps when there are either expected or unexpected downtime, by increasing the chances that one issue does not affect all VMs in a single Availability Set.
+* You get 200 USD worth of free credits to spend in Azure for the first time you create an account
+* In Azure, we apply NSG(**Network Security Groups**) at subnet or individual NIC level(VM) whereas in AWS these can only be applied at individual VM level. NACL is applied at subnet level in AWS.
+* If Azure does not meet its SLA, A discount will be applied to the customer's azure bill (as **service credit**)
