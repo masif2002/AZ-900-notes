@@ -35,6 +35,12 @@
     * **Zone-Redundant**: Azure automatically deploys across multiple AZs in the region
     * **Always Available**: Services deployed globally across multiple regions 
 
+```
+LRS => Locally Redundant Storage
+ZRS => Zone Redundant Storage
+GRS => Geo Redundant Storage
+RA-GRS => Read-Access Geo Redundant Storage
+```
 ## Resource, Resource Groups and Subscriptions
 
 ### Resource Groups
@@ -93,6 +99,7 @@ Disk Storage => Managed
 * Azure Active Directory (AAD) is an Identity as a Service provided by Azure. It is not the same as the traditional Active Directory that runs on Windows
 * Developers can use AAD to implement authentication for their end users
 * There is an option called Conditional access in AAD which allows to set up MFA and other restrictions on detecting unusual login 
+* Azure Active Directory provides the following licenses: Free, Office 365, Premium P1, and Premium P2.
 
 
 ### Zero Trust Security Model
@@ -144,3 +151,10 @@ Tools used for security and Governance:
 * Allows you to monitor all Azure Resources in one place
 * **Diagnostic settings** in many Azure resources allows you to collect, export, query and view logs in Azure Monitor  
 * **Workbooks** in Azure Monitor allows you to create and manage a visual reports of your own metrics  
+
+## Mock Test notes
+* A virtual machine needs a network card, storage and a virtual network. It does not need a public IP address. In fact, most Azure VMs are private and are not accessible from the Internet.
+* Azure Powershell scripts and CLI scripts are not compatible with each other. PowerShell has it's own language, different than CLI
+*  Azure is a public cloud, but has some private cloud offerings such as the GovCloud
+* Firewall is part of the perimeter security
+* Azure Availability Sets allow you to tell Azure which virtual machines are identical, so that Azure will keep them apart physically inside the datacenter. This helps when there are either expected or unexpected downtime, by increasing the chances that one issue does not affect all VMs in a single Availability Set.
