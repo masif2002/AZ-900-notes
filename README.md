@@ -14,10 +14,10 @@
 * There is no limit to horizontal scaling
 
 ## PaaS
+* PaaS mainly consists of two components: Packaged Code & Configurations
 * Azure App Services is a PaaS 
 * Includes autoscaling features, CI/CD, containers, staging and dev environments, etc ...
-* PaaS mainly consists of two components: Packaged Code & Configurations
-
+* The Azure App Service Environment (ASE) is a Premium feature offering of the Azure App Service. It gives a single-tenant instance of the Azure App Service that runs right in your own Azure virtual network (VNet), providing network isolation and improved scaling capabilities.
 ## Regions
 * Usually, there is only one region per country, but in Azure, some countries have multiple regions
 * As of now, Azure has over 60+ regions
@@ -44,6 +44,7 @@ ZRS => Zone Redundant Storage
 GRS => Geo Redundant Storage
 RA-GRS => Read-Access Geo Redundant Storage
 ```
+* Geo-redundant storage (GRS) copies your data synchronously three times within a single physical location in the primary region using LRS. It then copies your data asynchronously to a single physical location in the secondary region. Within the secondary region, your data is copied synchronously three times using LRS
 ## Resource, Resource Groups and Subscriptions
 
 ### Resource Groups
@@ -55,6 +56,7 @@ RA-GRS => Read-Access Geo Redundant Storage
 * There is a payment method associated with each subscription
 * Subscription Plans include Free Plan, Pay-As-You-Go, Enterprise Agreement ....
 * Subscriptions are usually used to seperate out diff depts in a business, Ex: Finance, IT, Sales.... OR seperate by Geography NA, Europe, Asia
+* There is not a limit to the number of subscriptions a single user can be included on
 
 ![](img/rg-hierarchy.png)
 
@@ -75,10 +77,12 @@ RA-GRS => Read-Access Geo Redundant Storage
 ## Networking Services
 * **ExpressRoute** - A high speed private connection to Azure
 * Peering Virtual Networks allows instances in one VM to communicate with instances in other VM. This can be global as well
-* You have an option of creating a public/private endpoint on a resource that is created.   
+* Virtual networks can be connected by either peering, or with installing **network gateway** devices on each.
+* A **VPN Gateway** needs to be configured on the company's network to establish a site-to-site VPN connection to connect to Azure
+* You have an option of creating a public/private endpoint on a resource that is created.
+    * A **private endpoint** is a network interface that uses a private IP address from your virtual network. This network interface connects you privately and securely to a service that's powered by Azure Private Link. By enabling a private endpoint, you're bringing the service into your virtual network.
 
-## Storage Services
-### Azure Storage
+## Storage ServicesA Log Analytics workspace is a unique environment for log data from Azure Monitor and other Azure services### Azure Storage
 * In Azure, you create a Storage account and in that account you have 4 different types of storages:
     * Containers or Blobs (Similar to object storage in S3)
     * File Shares
@@ -86,7 +90,7 @@ RA-GRS => Read-Access Geo Redundant Storage
     * Tables
 * You have `Standard` and `Premium` performance types in Azure Storage. Premium Performance = Low Latency
 * *General purpose v2* is the standard storage account type for blobs, file shares, queues, and tables. Recommended for most scenarios using Azure Storage.
-* A storage account supports max of 5 PBs 
+* A single Azure subscription can have up to 250 storage accounts per region, and each storage account can store up to 5 Petabytes.
 * Azure Files offers two industry-standard file system protocols for mounting Azure file shares: the Server Message Block (SMB) protocol and the Network File System (NFS) protocol
 * In Azure storage you pay per GB whereas in Disk Storage, you pay for the full capacity (ex: 8GB Hard Disk)
 ```
@@ -111,6 +115,7 @@ Disk Storage => Managed
 * Azure AD can control the access of both the apps and the app resources as well.
 * With Azure AD B2B collaboration, you can invite anyone to collaborate with your organization using their own work, school, or social account. ie- as a guest user 
 * **Azure Tenant** is a dedicated and trusted instance of Azure AD that's automatically created when your organization signs up for a Microsoft cloud service subscription.
+* Azure AD Domain Services (Azure AD DS) provides managed domain services such as domain join, group policy, lightweight directory access protocol (LDAP), and Kerberos/NTLM authentication. You use these domain services without the need to deploy, manage, and patch domain controllers (DCs) in the cloud.
 ### Azure Active Directory preview programs
 1. private preview: Few customers are invited to experience the new features
 2. public preview:
@@ -134,6 +139,7 @@ Disk Storage => Managed
 ### Zero Trust Security Model
 * Just In Time (JIT) Model: You request for permissions only when you need it
 * Just-Enough-Access (JEA): Least previlege principle 
+* The three principles of zero trust are: verify explicitly, use least privilege access, and assume breach
 
 ### Role Based Control Access
 * Roles in Azure are similar to GCP. They are permissions binded to users
@@ -165,6 +171,8 @@ Tools used for security and Governance:
 * Centralized repository for all the compliance artefacts by Azure
 * It also contains security audits conducted by third parties
 
+### Security Center
+* Azure Security Center - unified security management and threat protection; a security dashboard inside Azure Portal 
 ### Microsoft Defender
 * Microsoft Defender is a paid service provided by Azure for security protection of cloud services 
 
@@ -213,4 +221,8 @@ Tools used for security and Governance:
 * Azure **DNS private zones** provide a simple, reliable, secure DNS service to manage and resolve names in a virtual network without the need to create and manage a custom DNS solution. Use your own domain names and get name resolution for virtual machines within and between virtual networks. 
     * Additionally, configure zone names with a split-horizon view to allow a private and a public DNS zone to share the same name.
 * **Application gateway** can make load balancing decisions based on the URL path, while a load balancer can't
+    * Application Gateways also comes with an optional Web Application Firewall (or WAF) as a security benefit
 * The **Trust Center** is a publicly accessible web portal that acts as a single point of focus for an organization that needs resources and in-depth information regarding the Microsoft principles of security, privacy, and compliance.
+* Business Continuity means the same as Disaster Recovery
+* Each resource  in Azure has a **Resource Health** blade
+* A **Log Analytics workspace** is a unique environment for log data from Azure Monitor and other Azure services
