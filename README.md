@@ -16,10 +16,12 @@
 ## PaaS
 * Azure App Services is a PaaS 
 * Includes autoscaling features, CI/CD, containers, staging and dev environments, etc ...
+* PaaS mainly consists of two components: Packaged Code & Configurations
 
 ## Regions
 * Usually, there is only one region per country, but in Azure, some countries have multiple regions
 * As of now, Azure has over 60+ regions
+* You **must** select a region while creating more resources
 
 ### Region Pair
 * In Azure, you have something called a region pair, where two regions are paired. And these paired regions have highest speed connections and special treatment during Azure updates 
@@ -65,6 +67,7 @@ RA-GRS => Read-Access Geo Redundant Storage
 * Supports Autoscaling
 * Can handle upto 100 VMs in a single scale set. Can configure it upto a 1000 VMs
 * VM Scale set is free but you do pay for the underlying instances 
+* VMSS provides autoscale features and has a built in load balancer. You still need to have a way to deploy your code to the new servers, as you do with regular VMs
 
 ### Azure Virtual Desktop  
 * Azure Virtual Desktop is a desktop version of Windows that runs in the cloud. You can log into it from anywhere 
@@ -82,7 +85,9 @@ RA-GRS => Read-Access Geo Redundant Storage
     * Queues
     * Tables
 * You have `Standard` and `Premium` performance types in Azure Storage. Premium Performance = Low Latency
+* *General purpose v2* is the standard storage account type for blobs, file shares, queues, and tables. Recommended for most scenarios using Azure Storage.
 * A storage account supports max of 5 PBs 
+* Azure Files offers two industry-standard file system protocols for mounting Azure file shares: the Server Message Block (SMB) protocol and the Network File System (NFS) protocol
 * In Azure storage you pay per GB whereas in Disk Storage, you pay for the full capacity (ex: 8GB Hard Disk)
 ```
 Azure Storage => Unmanaged
@@ -96,12 +101,16 @@ Disk Storage => Managed
 * Azure **Migrate** is a service that allows you to easily migrate to the cloud. It scans for VMs, databases, services in your environments (on-premises) and plans for your migration
 * **DataBox** is a physical device that you can request for to transfer data to Azure offline 
 
-## Identity Services
+## Azure Active Directory
 * **Azure Active Directory** (AAD) is an Identity as a Service provided by Azure. It is not the same as the traditional Active Directory that runs on Windows
 * Developers can use AAD to implement authentication for their end users
-* There is an option called Conditional access in AAD which allows to set up MFA and other restrictions on detecting unusual login 
-* Azure Active Directory provides the following licenses: Free, Office 365, Premium P1, and Premium P2.
-
+* There is an option called Conditional access in AAD which allows to set up MFA and other restrictions on detecting unusual login
+    * 
+* Azure Active Directory provides the following licenses: Free, Office 365, Premium 
+* **AD Connect** is used to synchronize your corporate AD with Azure AD.
+* Azure AD can control the access of both the apps and the app resources as well.
+* With Azure AD B2B collaboration, you can invite anyone to collaborate with your organization using their own work, school, or social account. ie- as a guest user 
+* **Azure Tenant** is a dedicated and trusted instance of Azure AD that's automatically created when your organization signs up for a Microsoft cloud service subscription.
 ### Azure Active Directory preview programs
 1. private preview: Few customers are invited to experience the new features
 2. public preview:
@@ -112,8 +121,16 @@ Disk Storage => Managed
 3. Generally available (GA): 
     * the feature is open for any licensed customer to use
     * the new feature impacts existing functionality unlike public preview phase
-    
+
 > https://azure.microsoft.com/en-us/support/legal/preview-supplemental-terms/
+### PIM
+* **Privileged Identity Management** (PIM) is a service in Azure Active Directory (Azure AD) that enables you to manage, control, and monitor access to important resources in your organization
+* PIM provides time-based and approval-based role activation to mitigate the risks of excessive, unnecessary, or misused access permissions on resources that you care about
+* Some key features of PIM:
+    * Enforce multi-factor authentication to activate any role
+    * Get notifications when privileged roles are activated
+
+> https://learn.microsoft.com/en-us/azure/active-directory/privileged-identity-management/pim-configure    
 ### Zero Trust Security Model
 * Just In Time (JIT) Model: You request for permissions only when you need it
 * Just-Enough-Access (JEA): Least previlege principle 
@@ -130,7 +147,8 @@ Disk Storage => Managed
 Tools used for security and Governance:
 ### Azure Policy
 * You can enforce a policy on resources created. 
-* You can have all VMs have a backup on a regular basis
+* For Example: You can have all VMs have a backup on a regular basis
+* Azure Policy helps to enforce organizational standards and to assess compliance at-scale.
 ### Azure BluePrint
 * You can create Blueprints and attach it to a subscription. The blueprint is created when the subscription is active. The blueprint maybe like have 5 VM instances with one Load balancer
 
@@ -145,9 +163,13 @@ Tools used for security and Governance:
 
 ### Service Trust Portal
 * Centralized repository for all the compliance artefacts by Azure
+* It also contains security audits conducted by third parties
 
 ### Microsoft Defender
 * Microsoft Defender is a paid service provided by Azure for security protection of cloud services 
+
+### Defense in Depth
+* A common cyber security approach used by organizations to protect their digital assets is to leverage a defense-in-depth strategy. The SANS Institute defines defense-in-depth as 'protecting a computer network with a series of defensive mechanisms such that if one mechanism fails, another will already be in place to thwart an attack.'
 
 ## Azure Arc
 * Azure Arc is a service that allows you to manage resources running on on-premises and multi-cloud. It is basically a unified view of all the resources that you are using
@@ -157,7 +179,7 @@ Tools used for security and Governance:
 ![](img/arm.png)
 
 * You can create ARM templates and deploy those ARM templates to create Resources (more like Infrastrcture as a Code)
-
+* ARM templates are created in JSON
 ## Other Services
 ### Azure Advisor
 * Analyzes all your resources and provides recommendations that you can do to save costs, minimize vulnerabilities and so on ...
@@ -169,6 +191,8 @@ Tools used for security and Governance:
 * Allows you to monitor all Azure Resources in one place
 * **Diagnostic settings** in many Azure resources allows you to collect, export, query and view logs in Azure Monitor  
 * **Workbooks** in Azure Monitor allows you to create and manage a visual reports of your own metrics  
+* AM allows you to respond to issues by firing alerts that can send notifications or by calling automated solutions. Ex: Fire an alert everytime a new VM is created
+
 
 ### Azure Cognitive Services API
 * All it takes is an API call to embed the ability to see, hear, speak, search, understand, and accelerate advanced decision-making into your apps.
@@ -180,7 +204,13 @@ Tools used for security and Governance:
 * Azure Powershell scripts and CLI scripts are not compatible with each other. PowerShell has it's own language, different than CLI
 *  Azure is a public cloud, but has some private cloud offerings such as the GovCloud
 * Firewall is part of the perimeter security
-* Azure Availability Sets allow you to tell Azure which virtual machines are identical, so that Azure will keep them apart physically inside the datacenter. This helps when there are either expected or unexpected downtime, by increasing the chances that one issue does not affect all VMs in a single Availability Set.
+* Azure **Availability Sets** allow you to tell Azure which virtual machines are identical, so that Azure will keep them apart physically inside the datacenter. This helps when there are either expected or unexpected downtime, by increasing the chances that one issue does not affect all VMs in a single Availability Set.
 * You get 200 USD worth of free credits to spend in Azure for the first time you create an account
 * In Azure, we apply NSG(**Network Security Groups**) at subnet or individual NIC level(VM) whereas in AWS these can only be applied at individual VM level. NACL is applied at subnet level in AWS.
 * If Azure does not meet its SLA, A discount will be applied to the customer's azure bill (as **service credit**)
+* Infrastructure as a service is the **easiest to migrate** into, from an existing hosted app 
+* 99.99% is 4 minutes per month of **downtime**
+* Azure **DNS private zones** provide a simple, reliable, secure DNS service to manage and resolve names in a virtual network without the need to create and manage a custom DNS solution. Use your own domain names and get name resolution for virtual machines within and between virtual networks. 
+    * Additionally, configure zone names with a split-horizon view to allow a private and a public DNS zone to share the same name.
+* **Application gateway** can make load balancing decisions based on the URL path, while a load balancer can't
+* The **Trust Center** is a publicly accessible web portal that acts as a single point of focus for an organization that needs resources and in-depth information regarding the Microsoft principles of security, privacy, and compliance.
