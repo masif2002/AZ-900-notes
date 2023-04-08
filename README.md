@@ -1,4 +1,23 @@
 # Azure Fundamentals 
+Personalized notes for the AZ-900: Microsoft Azure Fundamentals Certification
+
+## Table Of Contents
+1. [Virtual Machines](#vms)
+2. [Scaling](#scaling)
+3. [PaaS in Azure](#paas)
+4. [Regions in Azure](#regions)
+5. [Availability Zones](#availability-zones)
+6. [Resource, Resource Groups and Scubscriptions](#resource-resource-groups-and-subscriptions)
+7. [VM Scale Sets](#vm-scale-sets)
+8. [Networking Services](#networking-services)
+9. [Storage Services](#storage-services)
+10. [Azure Active Directory](#azure-active-directory)
+11. [Pricing Calculator](#pricing-calculator)
+12. [Security & Governance](#security-and-governance)
+13. [Azure Arc](#azure-arc)
+14. [Azure Resource Manager](#azure-resource-manager-arm)
+15. [Other Services](#other-services)
+15. [Notes from Mock Test](#mock-test-notes)
 ## VMs
 * In Azure, you are charged for the VM per second
 * In Windows, you have an Administrator username and password where as in Linux, you have SSH keys to access the instance
@@ -20,11 +39,11 @@
 * The Azure App Service Environment (ASE) is a Premium feature offering of the Azure App Service. It gives a single-tenant instance of the Azure App Service that runs right in your own Azure virtual network (VNet), providing network isolation and improved scaling capabilities.
 ## Regions
 * Usually, there is only one region per country, but in Azure, some countries have multiple regions
-* As of now, Azure has over 60+ regions
-* You **must** select a region while creating more resources
+* As of now, Azure has over 60+ regions. Some regions of the world require special contracts with the local provider such as Germany and China.
+* You **must** select a region while creating most resources
 
 ### Region Pair
-* In Azure, you have something called a region pair, where two regions are paired. And these paired regions have highest speed connections and special treatment during Azure updates 
+* In Azure, you have something called a region pair, where two regions are paired. And these paired regions have highest speed connections and special treatment during Azure updates. They are usually used for Disaster Recovery (DR)
 
 ![](img/region-pairs.png)
 
@@ -34,7 +53,7 @@
 ## Availability Zones
 * Not every region in Azure support AZs
 * There are 3 types of services in Azure:
-    * **Zonal**: You deploy services to a speicific AZ and duplicate it to other AZs for backup and availability
+    * **Zonal**: You deploy services to a specific AZ and duplicate it to other AZs for backup and availability
     * **Zone-Redundant**: Azure automatically deploys across multiple AZs in the region
     * **Always Available**: Services deployed globally across multiple regions 
 
@@ -66,10 +85,12 @@ RA-GRS => Read-Access Geo Redundant Storage
 
 ## VM Scale Sets
 * Multiple Virtual Machines running the same code
-* Supports Autoscaling
 * Can handle upto 100 VMs in a single scale set. Can configure it upto a 1000 VMs
 * VM Scale set is free but you do pay for the underlying instances 
 * VMSS provides autoscale features and has a built in load balancer. You still need to have a way to deploy your code to the new servers, as you do with regular VMs
+
+### Availability Set 
+* Azure **Availability Sets** allow you to tell Azure which virtual machines are identical, so that Azure will keep them apart physically inside the datacenter. This helps when there are either expected or unexpected downtime, by increasing the chances that one issue does not affect all VMs in a single Availability Set.
 
 ### Azure Virtual Desktop  
 * Azure Virtual Desktop is a desktop version of Windows that runs in the cloud. You can log into it from anywhere 
@@ -82,7 +103,8 @@ RA-GRS => Read-Access Geo Redundant Storage
 * You have an option of creating a public/private endpoint on a resource that is created.
     * A **private endpoint** is a network interface that uses a private IP address from your virtual network. This network interface connects you privately and securely to a service that's powered by Azure Private Link. By enabling a private endpoint, you're bringing the service into your virtual network.
 
-## Storage ServicesA Log Analytics workspace is a unique environment for log data from Azure Monitor and other Azure services### Azure Storage
+## Storage Services
+### Azure Storage
 * In Azure, you create a Storage account and in that account you have 4 different types of storages:
     * Containers or Blobs (Similar to object storage in S3)
     * File Shares
@@ -99,7 +121,7 @@ Disk Storage => Managed
 ```
 
 ### Other Storage Services
-* Azure **Storage Explorer** is a software that can be run on your local machine to upload files to storage. It is getting depreciated soon and is replaced with **Storage browser** instead which performs the similar functionality as well 
+* Azure **Storage Explorer** is a software that can be run on your local machine to upload files to storage. It is getting depreciated soon and is replaced with **Storage browser** instead which performs similar functionality as well 
 * **AZcopy** is a CLI tool that allows you to copy files across blob containers (Storage) in Azure. You can also use it to download files locally or even transfer to a storage bucket on another cloud
 * Azure **File Sync** enables to sync on premises file server in the cloud
 * Azure **Migrate** is a service that allows you to easily migrate to the cloud. It scans for VMs, databases, services in your environments (on-premises) and plans for your migration
@@ -109,7 +131,6 @@ Disk Storage => Managed
 * **Azure Active Directory** (AAD) is an Identity as a Service provided by Azure. It is not the same as the traditional Active Directory that runs on Windows
 * Developers can use AAD to implement authentication for their end users
 * There is an option called Conditional access in AAD which allows to set up MFA and other restrictions on detecting unusual login
-    * 
 * Azure Active Directory provides the following licenses: Free, Office 365, Premium 
 * **AD Connect** is used to synchronize your corporate AD with Azure AD.
 * Azure AD can control the access of both the apps and the app resources as well.
@@ -175,6 +196,8 @@ Tools used for security and Governance:
 * Azure Security Center - unified security management and threat protection; a security dashboard inside Azure Portal 
 ### Microsoft Defender
 * Microsoft Defender is a paid service provided by Azure for security protection of cloud services 
+### Azure Firewall
+* Azure Firewall has a threat-intelligence option that will automatically block traffic to/from bad actors on the Internet. It can blacklist IPs  
 
 ### Defense in Depth
 * A common cyber security approach used by organizations to protect their digital assets is to leverage a defense-in-depth strategy. The SANS Institute defines defense-in-depth as 'protecting a computer network with a series of defensive mechanisms such that if one mechanism fails, another will already be in place to thwart an attack.'
@@ -212,11 +235,10 @@ Tools used for security and Governance:
 * Azure Powershell scripts and CLI scripts are not compatible with each other. PowerShell has it's own language, different than CLI
 *  Azure is a public cloud, but has some private cloud offerings such as the GovCloud
 * Firewall is part of the perimeter security
-* Azure **Availability Sets** allow you to tell Azure which virtual machines are identical, so that Azure will keep them apart physically inside the datacenter. This helps when there are either expected or unexpected downtime, by increasing the chances that one issue does not affect all VMs in a single Availability Set.
-* You get 200 USD worth of free credits to spend in Azure for the first time you create an account
+* You get 200 USD worth of free credits to spend in Azure for the first time you create an account. Using up the free credits causes all your resources to be stopped until you decide to get a paid account.
 * In Azure, we apply NSG(**Network Security Groups**) at subnet or individual NIC level(VM) whereas in AWS these can only be applied at individual VM level. NACL is applied at subnet level in AWS.
 * If Azure does not meet its SLA, A discount will be applied to the customer's azure bill (as **service credit**)
-* Infrastructure as a service is the **easiest to migrate** into, from an existing hosted app 
+* Infrastructure as a service is the **easiest to migrate** into, from an existing hosted app on-premises 
 * 99.99% is 4 minutes per month of **downtime**
 * Azure **DNS private zones** provide a simple, reliable, secure DNS service to manage and resolve names in a virtual network without the need to create and manage a custom DNS solution. Use your own domain names and get name resolution for virtual machines within and between virtual networks. 
     * Additionally, configure zone names with a split-horizon view to allow a private and a public DNS zone to share the same name.
@@ -226,3 +248,5 @@ Tools used for security and Governance:
 * Business Continuity means the same as Disaster Recovery
 * Each resource  in Azure has a **Resource Health** blade
 * A **Log Analytics workspace** is a unique environment for log data from Azure Monitor and other Azure services
+* **Cosmos DB** is low latency, and even offers sub 5-ms response times at some levels.
+* If you don't want to spend over a certain amount in Azure, implement a **spending limit** in the account center
